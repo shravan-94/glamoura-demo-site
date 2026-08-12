@@ -103,21 +103,10 @@
       border-radius: 12px; padding: 10px 16px; box-shadow: var(--shadow-sm); font-size: 13px; }
     .hero-art .float b { color: var(--rose); }
 
-    /* ── Category tiles ── */
+    /* ── Section headings ── */
     .section-head { text-align: center; margin: 20px 0 26px; }
     .section-head h2 { font-family: var(--serif); font-size: 30px; font-weight: 700; color: var(--plum); margin: 0 0 6px; }
     .section-head p { color: var(--muted); font-size: 13px; letter-spacing: 2px; text-transform: uppercase; margin: 0; }
-    .cats { display: grid; grid-template-columns: repeat(4,1fr); gap: 16px; padding: 26px 0 12px; }
-    .cat { position: relative; border-radius: var(--radius); padding: 30px 22px; min-height: 150px;
-      display: flex; flex-direction: column; justify-content: flex-end; text-decoration: none;
-      border: 1px solid rgba(201,185,176,0.5); overflow: hidden; }
-    .cat .em { position: absolute; top: 18px; right: 20px; font-size: 30px; opacity: .9; }
-    .cat h3 { font-family: var(--serif); font-size: 21px; color: var(--plum); margin: 0 0 3px; }
-    .cat span { font-size: 12px; letter-spacing: 1.5px; text-transform: uppercase; color: var(--rose); font-weight: 600; }
-    .cat.c1 { background: linear-gradient(160deg,#FBF0EC,var(--blush)); }
-    .cat.c2 { background: linear-gradient(160deg,#FBF5EF,#F3E4D3); }
-    .cat.c3 { background: linear-gradient(160deg,#F6EEF3,#EAD3E1); }
-    .cat.c4 { background: linear-gradient(160deg,#F1F0EC,#DDE5DC); }
 
     /* ── Product grid (with an Auxia card surface inline) ── */
     .grid-section { padding: 48px 0 20px; }
@@ -127,11 +116,6 @@
     .product .shot { position: relative; aspect-ratio: 1/1; overflow: hidden;
       background: linear-gradient(160deg,#FBF0EC,#F6E7EA); }
     .product .shot img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
-    /* full catalog: category rows (auto 3-up, collapses on mobile) + section titles */
-    .prow { display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 20px; }
-    .cat-title { display: flex; align-items: baseline; justify-content: space-between; margin: 48px 0 18px; }
-    .cat-title h3 { font-family: var(--serif); font-size: 26px; color: var(--plum); margin: 0; }
-    .cat-title a { font-size: 11px; letter-spacing: 1.5px; text-transform: uppercase; color: var(--rose); font-weight: 700; text-decoration: none; }
     .product .body { padding: 16px 18px 20px; flex: 1; display: flex; flex-direction: column; }
     .product .cat-lbl { font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: var(--gold); font-weight: 700; margin-bottom: 6px; }
     .product h4 { font-family: var(--serif); font-size: 18px; color: var(--plum); margin: 0 0 4px; }
@@ -211,7 +195,6 @@
       nav.main { display: none; }
       .hero { grid-template-columns: 1fr; gap: 28px; padding: 40px 0 24px; }
       .hero h1 { font-size: 42px; }
-      .cats { grid-template-columns: repeat(2,1fr); }
       .products { grid-template-columns: repeat(2,1fr); }
       .loyalty { padding: 36px 24px; }
     }
@@ -262,17 +245,6 @@
       <div class="hero-art">
         <img src="assets/hero-cross-category.png" alt="Glamoura skincare and makeup edit" />
         <div class="float">✦ Your skincare did the work. <b>Now let it show.</b></div>
-      </div>
-    </section>
-
-    <!-- ── Category tiles ── -->
-    <section>
-      <div class="section-head"><h2>Shop by category</h2><p>Skincare to makeup, all in one edit</p></div>
-      <div class="cats">
-        <a class="cat c1" href="#"><span class="em">🧴</span><h3>Skincare</h3><span>Serums · Moisturizers</span></a>
-        <a class="cat c2" href="#"><span class="em">💄</span><h3>Makeup</h3><span>Face · Lip · Eye</span></a>
-        <a class="cat c3" href="#"><span class="em">🌸</span><h3>Fragrance</h3><span>Eau de parfum</span></a>
-        <a class="cat c4" href="#"><span class="em">🛁</span><h3>Hair &amp; Bath</h3><span>Masks · Oils</span></a>
       </div>
     </section>
 
