@@ -124,8 +124,14 @@
     .products { display: grid; grid-template-columns: repeat(4,1fr); gap: 20px; }
     .product { background: var(--white); border-radius: var(--radius); border: 1px solid rgba(201,185,176,0.4);
       overflow: hidden; box-shadow: var(--shadow-sm); display: flex; flex-direction: column; }
-    .product .shot { aspect-ratio: 1/1; display: grid; place-items: center; font-size: 46px;
+    .product .shot { position: relative; aspect-ratio: 1/1; overflow: hidden;
       background: linear-gradient(160deg,#FBF0EC,#F6E7EA); }
+    .product .shot img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+    /* full catalog: category rows (auto 3-up, collapses on mobile) + section titles */
+    .prow { display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 20px; }
+    .cat-title { display: flex; align-items: baseline; justify-content: space-between; margin: 48px 0 18px; }
+    .cat-title h3 { font-family: var(--serif); font-size: 26px; color: var(--plum); margin: 0; }
+    .cat-title a { font-size: 11px; letter-spacing: 1.5px; text-transform: uppercase; color: var(--rose); font-weight: 700; text-decoration: none; }
     .product .body { padding: 16px 18px 20px; flex: 1; display: flex; flex-direction: column; }
     .product .cat-lbl { font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: var(--gold); font-weight: 700; margin-bottom: 6px; }
     .product h4 { font-family: var(--serif); font-size: 18px; color: var(--plum); margin: 0 0 4px; }
@@ -158,7 +164,7 @@
     /* ── Glam Circle loyalty band ── */
     .loyalty { background: linear-gradient(150deg, var(--plum), var(--plum-2)); color: var(--cream);
       border-radius: 20px; padding: 48px 44px; margin: 56px 0 20px; text-align: center; }
-    .loyalty .k { font-size: 11px; letter-spacing: 3px; text-transform: uppercase; color: var(--gold); margin: 0 0 12px; }
+    .loyalty .k { font-size: 11px; letter-spacing: 3px; text-transform: uppercase; color: var(--gold); margin: 0 0 12px; max-width: none; }
     .loyalty h2 { font-family: var(--serif); font-size: 32px; margin: 0 0 12px; color: var(--white); }
     .loyalty p { color: rgba(251,245,239,0.8); max-width: 52ch; margin: 0 auto 24px; }
     .loyalty .btn-primary { background: var(--gold); color: var(--plum); }
@@ -170,6 +176,9 @@
     .jfy .em { font-size: 26px; }
     .jfy b { color: var(--rose); }
     .jfy .sub { color: var(--muted); font-size: 13px; }
+    .jfy-txt { flex: 1; }
+    .jfy-head { color: var(--ink); }
+    .jfy-cta { white-space: nowrap; font-size: 11px; letter-spacing: 1.5px; text-transform: uppercase; font-weight: 700; color: var(--rose); text-decoration: none; }
 
     /* ── Footer ── */
     footer { background: var(--plum); color: var(--cream); margin-top: 40px; padding: 46px 40px 30px; text-align: center; }
@@ -258,7 +267,7 @@
 
     <!-- ── Category tiles ── -->
     <section>
-      <div class="section-head"><h2>Shop by category</h2><p>Curated, not overwhelming</p></div>
+      <div class="section-head"><h2>Shop by category</h2><p>Skincare to makeup, all in one edit</p></div>
       <div class="cats">
         <a class="cat c1" href="#"><span class="em">🧴</span><h3>Skincare</h3><span>Serums · Moisturizers</span></a>
         <a class="cat c2" href="#"><span class="em">💄</span><h3>Makeup</h3><span>Face · Lip · Eye</span></a>
@@ -273,7 +282,7 @@
       <div class="products">
 
         <div class="product">
-          <div class="shot">🧪</div>
+          <div class="shot"><img src="assets/products/rose-quartz-serum.jpg" alt="Rose Quartz Serum" loading="lazy" onerror="this.remove()"></div>
           <div class="body">
             <div class="cat-lbl">Skincare</div>
             <h4>Rose Quartz Serum</h4>
@@ -283,7 +292,7 @@
         </div>
 
         <div class="product">
-          <div class="shot">💧</div>
+          <div class="shot"><img src="assets/products/skin-veil-tint.jpg" alt="Skin Veil Tint" loading="lazy" onerror="this.remove()"></div>
           <div class="body">
             <div class="cat-lbl">Makeup</div>
             <h4>Skin Veil Tint</h4>
@@ -292,7 +301,17 @@
           </div>
         </div>
 
-        <!-- ══ AUXIA SURFACE 2 — content card (default = site control) ══ -->
+        <div class="product">
+          <div class="shot"><img src="assets/products/velvet-lip-colour.jpg" alt="Velvet Lip Colour" loading="lazy" onerror="this.remove()"></div>
+          <div class="body">
+            <div class="cat-lbl">Makeup</div>
+            <h4>Velvet Lip Colour <span class="badge">Bestseller</span></h4>
+            <p class="desc">Hydrating matte, 12-hour wear.</p>
+            <div class="row"><span class="price">$26</span><a class="add" href="#">Add to bag</a></div>
+          </div>
+        </div>
+
+        <!-- ══ AUXIA SURFACE 2 — content card (default = site control); LAST so it reads 3 products then the quiz ══ -->
         <div id="auxia-feed-card"
              data-auxia-surface="WEB_HOME_FEED_CARD"
              data-auxia-position="replace"
@@ -305,16 +324,73 @@
           </div>
         </div>
 
-        <div class="product">
-          <div class="shot">💋</div>
-          <div class="body">
-            <div class="cat-lbl">Makeup</div>
-            <h4>Velvet Lip Colour <span class="badge">Bestseller</span></h4>
-            <p class="desc">Hydrating matte, 12-hour wear.</p>
-            <div class="row"><span class="price">$26</span><a class="add" href="#">Add to bag</a></div>
-          </div>
-        </div>
+      </div>
+    </section>
 
+    <!-- ── Full catalog by category (3 per category) ── -->
+    <section>
+      <div class="cat-title"><h3>Skincare</h3><a href="#">View all →</a></div>
+      <div class="prow">
+        <div class="product">
+          <div class="shot"><img src="assets/products/rose-quartz-serum.jpg" alt="Rose Quartz Serum" loading="lazy" onerror="this.remove()"></div>
+          <div class="body"><div class="cat-lbl">Skincare</div><h4>Rose Quartz Serum</h4><p class="desc">Weightless hydration, second-skin glow.</p><div class="row"><span class="price">$52</span><a class="add" href="#">Add to bag</a></div></div>
+        </div>
+        <div class="product">
+          <div class="shot"><img src="assets/products/dewdrop-moisturizer.jpg" alt="Dewdrop Moisturizer" loading="lazy" onerror="this.remove()"></div>
+          <div class="body"><div class="cat-lbl">Skincare</div><h4>Dewdrop Moisturizer</h4><p class="desc">24-hour weightless moisture.</p><div class="row"><span class="price">$44</span><a class="add" href="#">Add to bag</a></div></div>
+        </div>
+        <div class="product">
+          <div class="shot"><img src="assets/products/overnight-glow-mask.jpg" alt="Overnight Glow Mask" loading="lazy" onerror="this.remove()"></div>
+          <div class="body"><div class="cat-lbl">Skincare</div><h4>Overnight Glow Mask</h4><p class="desc">Wake up to plumper, brighter skin.</p><div class="row"><span class="price">$48</span><a class="add" href="#">Add to bag</a></div></div>
+        </div>
+      </div>
+
+      <div class="cat-title"><h3>Makeup</h3><a href="#">View all →</a></div>
+      <div class="prow">
+        <div class="product">
+          <div class="shot"><img src="assets/products/skin-veil-tint.jpg" alt="Skin Veil Tint" loading="lazy" onerror="this.remove()"></div>
+          <div class="body"><div class="cat-lbl">Makeup</div><h4>Skin Veil Tint</h4><p class="desc">Luminous, skin-perfecting finish.</p><div class="row"><span class="price">$38</span><a class="add" href="#">Add to bag</a></div></div>
+        </div>
+        <div class="product">
+          <div class="shot"><img src="assets/products/velvet-lip-colour.jpg" alt="Velvet Lip Colour" loading="lazy" onerror="this.remove()"></div>
+          <div class="body"><div class="cat-lbl">Makeup</div><h4>Velvet Lip Colour <span class="badge">Bestseller</span></h4><p class="desc">Hydrating matte, 12-hour wear.</p><div class="row"><span class="price">$26</span><a class="add" href="#">Add to bag</a></div></div>
+        </div>
+        <div class="product">
+          <div class="shot"><img src="assets/products/halo-setting-powder.jpg" alt="Halo Setting Powder" loading="lazy" onerror="this.remove()"></div>
+          <div class="body"><div class="cat-lbl">Makeup</div><h4>Halo Setting Powder</h4><p class="desc">Locks your look, frees your glow.</p><div class="row"><span class="price">$32</span><a class="add" href="#">Add to bag</a></div></div>
+        </div>
+      </div>
+
+      <div class="cat-title"><h3>Fragrance</h3><a href="#">View all →</a></div>
+      <div class="prow">
+        <div class="product">
+          <div class="shot"><img src="assets/products/amber-bloom-edp.jpg" alt="Amber Bloom Eau de Parfum" loading="lazy" onerror="this.remove()"></div>
+          <div class="body"><div class="cat-lbl">Fragrance</div><h4>Amber Bloom Eau de Parfum</h4><p class="desc">Warm amber, soft rose, unmistakably you.</p><div class="row"><span class="price">$72</span><a class="add" href="#">Add to bag</a></div></div>
+        </div>
+        <div class="product">
+          <div class="shot"><img src="assets/products/champagne-rose-edp.jpg" alt="Champagne Rose Eau de Parfum" loading="lazy" onerror="this.remove()"></div>
+          <div class="body"><div class="cat-lbl">Fragrance</div><h4>Champagne Rose Eau de Parfum</h4><p class="desc">Effervescent rose with a gold finish.</p><div class="row"><span class="price">$68</span><a class="add" href="#">Add to bag</a></div></div>
+        </div>
+        <div class="product">
+          <div class="shot"><img src="assets/products/velvet-musk-rollerball.jpg" alt="Velvet Musk Rollerball" loading="lazy" onerror="this.remove()"></div>
+          <div class="body"><div class="cat-lbl">Fragrance</div><h4>Velvet Musk Rollerball</h4><p class="desc">Your signature, pocket-sized.</p><div class="row"><span class="price">$28</span><a class="add" href="#">Add to bag</a></div></div>
+        </div>
+      </div>
+
+      <div class="cat-title"><h3>Hair &amp; Bath</h3><a href="#">View all →</a></div>
+      <div class="prow">
+        <div class="product">
+          <div class="shot"><img src="assets/products/silk-repair-hair-mask.jpg" alt="Silk Repair Hair Mask" loading="lazy" onerror="this.remove()"></div>
+          <div class="body"><div class="cat-lbl">Hair &amp; Bath</div><h4>Silk Repair Hair Mask</h4><p class="desc">Salon-smooth in five minutes.</p><div class="row"><span class="price">$36</span><a class="add" href="#">Add to bag</a></div></div>
+        </div>
+        <div class="product">
+          <div class="shot"><img src="assets/products/botanical-bath-oil.jpg" alt="Botanical Bath Oil" loading="lazy" onerror="this.remove()"></div>
+          <div class="body"><div class="cat-lbl">Hair &amp; Bath</div><h4>Botanical Bath Oil</h4><p class="desc">Spa-grade calm, at home.</p><div class="row"><span class="price">$34</span><a class="add" href="#">Add to bag</a></div></div>
+        </div>
+        <div class="product">
+          <div class="shot"><img src="assets/products/rose-quartz-body-cream.jpg" alt="Rose Quartz Body Cream" loading="lazy" onerror="this.remove()"></div>
+          <div class="body"><div class="cat-lbl">Hair &amp; Bath</div><h4>Rose Quartz Body Cream</h4><p class="desc">Buttery, fast-absorbing glow.</p><div class="row"><span class="price">$30</span><a class="add" href="#">Add to bag</a></div></div>
+        </div>
       </div>
     </section>
 
@@ -387,16 +463,25 @@
         }, 2600);
       }
 
-      // ── late-mount the "just for you" strip ~1.3s after load, so an element-anchored
-      //    Auxia surface can demo its MutationObserver anchor-wait against a late DOM node ──
+      // ── "Picked for you" personalization strip — late-mounts ~1.3s after load ──
+      // Variant SET (decisioning picks one live; append ?strip=0..3 to preview a specific one).
+      // These map 1:1 to the web treatment variants we'll load in the console.
+      var STRIP = [
+        { em: "✨", head: 'Picked for you — <b>because you love skincare</b>', sub: "Your serum's perfect match — a tinted moisturizer made for your skin.", cta: "See the match →" },
+        { em: "💛", head: 'Welcome back — <b>your glow routine missed you</b>', sub: "Here's 15% to pick up right where you left off.", cta: "Shop with 15% →" },
+        { em: "🎉", head: "You're <b>50 points from a reward</b>", sub: "Join Glam Circle and earn on today's order.", cta: "Join Glam Circle →" },
+        { em: "🌸", head: 'New in fragrance — <b>matched to your taste</b>', sub: "Amber Bloom: warm amber, soft rose, unmistakably you.", cta: "Discover the scent →" }
+      ];
       setTimeout(function () {
         var m = document.getElementById("auxia-latemount");
         if (!m || m.childElementCount) return;
+        var v = STRIP[parseInt(params.get("strip"), 10)] || STRIP[0];
         m.innerHTML =
           '<div class="jfy">' +
-          '  <span class="em">✨</span>' +
-          '  <div><div>Picked for you — <b>because you love skincare</b></div>' +
-          '  <div class="sub">This strip mounts after load; an Auxia surface can wait for it.</div></div>' +
+          '  <span class="em">' + v.em + '</span>' +
+          '  <div class="jfy-txt"><div class="jfy-head">' + v.head + '</div>' +
+          '  <div class="sub">' + v.sub + '</div></div>' +
+          '  <a class="jfy-cta" href="#">' + v.cta + '</a>' +
           '</div>';
       }, 1300);
 
